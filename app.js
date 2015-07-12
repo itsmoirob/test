@@ -14,16 +14,15 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 var config = require('./config');
-
-// connect to mongoLabDb
-mongoose.connect(config.database, function(err) {
-  if(err) console.log(err);
-  console.log('Connected to database.');
-});
-
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+
+// // connect to mongoLabDb
+// mongoose.connect(config.database, function(err) {
+//   if(err) console.log(err);
+//   console.log('Connected to database.');
+// });
 
 var app = express();
 
