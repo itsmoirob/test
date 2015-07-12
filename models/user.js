@@ -1,13 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var config = require('../config');
 
-// connect to mongoLabDb
-mongoose.connect(config.database, function(err) {
-  if(err) console.log(err);
-  console.log('Connected to database.');
-});
-var db = mongoose.connection;
 
 // User Schema
 var UserSchema = mongoose.Schema({
@@ -48,7 +41,7 @@ module.exports.getUserByUsername = function(username, callback){
 };
 
 module.exports.createUser = function(newUser, callback) {
-	bcrypt.hash(newUser.password, 10, function(err, hash){
+	bcrypt.hash(newUser.password, null, null, function(err, hash) {
 		if(err) throw err;
 		// Set hashed pw
 		newUser.password = hash;
