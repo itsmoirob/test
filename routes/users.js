@@ -27,7 +27,7 @@ router.post('/register',function(req, res, next){
 	var email = req.body.email;
 	var username = req.body.username;
 	var password = req.body.password;
-	var confirmPassword = req.body.confirmPassword;
+	var password2 = req.body.password2;
 
 	// Check for Image Field
 	if(req.files.profileimage){
@@ -51,7 +51,7 @@ router.post('/register',function(req, res, next){
 	req.checkBody('email','Email not valid').isEmail();
 	req.checkBody('username','Username field is required').notEmpty();
 	req.checkBody('password','Password field is required').notEmpty();
-	req.checkBody('confirmPassword','Passwords do not match').equals(req.body.password);
+	req.checkBody('password2','Passwords do not match').equals(req.body.password);
 
 	// Check for errors
 	var errors = req.validationErrors();
@@ -63,7 +63,7 @@ router.post('/register',function(req, res, next){
 			email: email,
 			username: username,
 			password: password,
-			confirmPassword: confirmPassword
+			password2: password2
 		});
 	} else {
 		var newUser = new User({
@@ -131,7 +131,7 @@ router.get('/logout', function(req, res){
 	req.logout();
 	req.flash('success','You have logged out');
 	res.redirect('/users/login');
-});
+});	
 
 
 module.exports = router;
